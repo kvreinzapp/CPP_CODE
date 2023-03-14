@@ -15,13 +15,13 @@ private:
   int year;
 };
 
-void add_year(ClockOfTheLongNow *clock) {
-  (*clock).set_year((*clock).get_year() + 1);
+void add_year(ClockOfTheLongNow &clock) {
+  clock.set_year(clock.get_year() + 1);
 }
 
 int main() {
   ClockOfTheLongNow clock;
   printf("The year is: %d\n", clock.get_year());
-  add_year(&clock);
+  add_year(clock);
   printf("The year is: %d\n", clock.get_year());
 }
