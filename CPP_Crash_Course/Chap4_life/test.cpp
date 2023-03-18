@@ -1,14 +1,14 @@
 #include <cstdio>
+#include <stdexcept>
 
-struct Tracer {
-  Tracer(const char *name) : name{name} { printf("%s constructed.\n", name); }
-  ~Tracer() { printf("%s destructed.\n", name); }
-
-private:
-  const char *const name;
+struct Apple {
+  void Macbook(const char *mac) { printf("Here: %s\n", mac); }
 };
 
-static Tracer t1{"Static variable"};
-thread_local Tracer t2{"Thread-local variable"};
+int main() {
+  int num1;
+  int &ref1 = num1;
 
-int main() {}
+  int *num2;
+  int &ref2 = num2;
+}
