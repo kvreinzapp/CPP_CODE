@@ -10,9 +10,28 @@ struct SimpleString {
     buffer = new char[max_size];
     buffer[0] = 0;
   }
+
+  SimpleString(const SimpleString &other)
+      : max_size{other.max_size}, buffer{new char[other.max_size]},
+        length{other.length} {
+    strncpy(buffer, other.buffer, max_size);
+  }
+
+  SimpleString &operator=(const SimpleString &other) {
+    if (this == &other)
+      return *this;
+    const auto new_buffer = new char[other.max_size];
+    delete[] buffer;
+    buffer = new_buffer;
+    max_size = other.max_size;
+    length = other.length;
+    strncpy(new_buffer, other.buffer, max_size);
+    return *this;
+  }
+
   ~SimpleString() { delete[] buffer; }
 
-  void print(const char *x) const { printf("%s %s", x, buffer); }
+  void print(const char *x) const { printf("%s: %s", x, buffer); }
 
   bool apend_line(const char *x) {
     const auto x_len = strlen(x);
@@ -45,6 +64,13 @@ private:
 };
 
 int main() {
-  SimpleStringOwner x{"apple"};
-  printf("x is alive\n");
+  SimpleString a{50};
+  a.apend_line("We apologize for the");
+  SimpleString b{50};
+  b.apend_line("Last message");
+  a.print("a");
+  b.print("b");
+  b = a;
+  a.print("a");
+  b.print("b");
 }
