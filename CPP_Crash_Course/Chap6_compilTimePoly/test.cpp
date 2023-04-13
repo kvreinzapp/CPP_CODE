@@ -1,8 +1,8 @@
 #include <cstdio>
 
-template <typename T> T square(T value) { return value * value; }
+int get(int arr[0], size_t Index) { return arr[Index]; }
 
 int main() {
-  int my_int{3};
-  auto result = square(my_int);
+  int fib[]{1, 1, 2, 3};
+  printf("%d", get(fib, 3));
 }
